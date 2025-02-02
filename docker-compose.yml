@@ -1,0 +1,26 @@
+services:
+  nerd-tracker-postgres:
+    container_name: nerd-tracker-postgres
+    image: postgres:17.2-bullseye
+    ports:
+      - "55432:5432"
+    restart: "no"
+    environment:
+      POSTGRES_USER: devroot
+      POSTGRES_PASSWORD: devroot
+      POSTGRES_DB: nerd-tracker
+    networks:
+      - nerd-tracker-network
+
+  nerd-tracker-adminer:
+    container_name: nerd-tracker-adminer
+    image: adminer:4.8.1-standalone
+    ports:
+      - "45085:8080"
+    networks:
+      - nerd-tracker-network
+
+networks:
+  nerd-tracker-network:
+    name: nerd-tracker-network
+    driver: bridge
